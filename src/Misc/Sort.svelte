@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-  import { HeaderDefinition } from "../Table.svelte";
+  import { HeaderDefinition } from "../Header.svelte";
   import { createEventDispatcher } from "svelte";
 
   export let headerDefinition: HeaderDefinition = null;

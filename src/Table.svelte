@@ -4,7 +4,7 @@
   import { HeaderDefinition } from "./Header.svelte";
   import Header from "./Header.svelte";
 
-  export let headers: HeaderDefinition[] = null;
+  export let headers: HeaderDefinition[] = [];
   export let data: RowDefinition[] = [];
 
   const dispatch = createEventDispatcher();
