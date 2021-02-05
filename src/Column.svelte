@@ -3,10 +3,11 @@
   import { ColumnDefinition } from "./Interfaces/ColumnDefinition";
 
   export let columnDefinition: ColumnDefinition;
-
+  
   const dispatch = createEventDispatcher();
   let editActive: boolean = false;
   let value: string = columnDefinition.value ?? "";
+  
   const triggerEditEvent = function (event: KeyboardEvent) {
     if (event.code != "Enter") {
       return;

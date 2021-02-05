@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
   import { HeaderDefinition } from "./Interfaces/HeaderDefinition";
   import Filter from "./Misc/Filter.svelte";
   import Sort from "./Misc/Sort.svelte";
@@ -7,21 +6,16 @@
   export let headerDefinition: HeaderDefinition;
 
   let dropDownVisible: boolean = false;
-
-  const dispatch = createEventDispatcher();
 </script>
 
 <th on:click={() => (dropDownVisible = !dropDownVisible)}>
   {headerDefinition.text}
-  <section>
+  <section style={dropDownVisible ? "display: block;" : "display: none"}>
     {#if headerDefinition.sortable}
-      <Sort {headerDefinition} on:sort={(event) => dispatch("sort", event)} />
+      <Sort {headerDefinition} on:sort />
     {/if}
     {#if headerDefinition.filterable}
-      <Filter
-        {headerDefinition}
-        on:filter={(event) => dispatch("filter", event)}
-      />
+      <Filter {headerDefinition} on:filter />
     {/if}
   </section>
 </th>
@@ -33,7 +27,6 @@
   }
 
   section {
-    display: block;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
