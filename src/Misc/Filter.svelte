@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { HeaderDefinition } from "../Interfaces/HeaderDefintion";
+  import { HeaderDefinition } from "../Interfaces/HeaderDefinition";
 
   export let headerDefinition: HeaderDefinition;
 

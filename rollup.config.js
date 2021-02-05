@@ -3,7 +3,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import pkg from './package.json';
 import typescript from '@rollup/plugin-typescript';
 import autoPreprocess from 'svelte-preprocess';
-
+import { terser } from 'rollup-plugin-terser';
+import commonjs from '@rollup/plugin-commonjs';
 const name = pkg.name
 	.replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
 	.replace(/^\w/, m => m.toUpperCase())
@@ -16,8 +17,10 @@ export default {
 		{ file: pkg.main, 'format': 'umd', name }
 	],
 	plugins: [
-		svelte({preprocess: autoPreprocess()}),
+		commonjs(),
 		typescript(),
-		resolve()
+		svelte({ preprocess: autoPreprocess() }),
+		resolve(),
+		terser()
 	]
 };
