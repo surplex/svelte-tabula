@@ -1,8 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import Row, { RowDefinition } from "./Row.svelte";
-  import { HeaderDefinition } from "./Header.svelte";
+  import Row from "./Row.svelte";
   import Header from "./Header.svelte";
+  import { HeaderDefinition } from "./Interfaces/HeaderDefinition";
+  import { RowDefinition } from "./Interfaces/RowDefinition";
 
   export let headers: HeaderDefinition[] = [];
   export let data: RowDefinition[] = [];
@@ -14,13 +15,17 @@
   <thead>
     <tr>
       {#each headers as header}
-        <Header headerDefinition={header} />
+        <Header
+          on:sort={(event) => dispatch("sort", event)}
+          on:filter={(event) => dispatch("filter", event)}
+          headerDefinition={header}
+        />
       {/each}
     </tr>
   </thead>
   <tbody>
     {#each data as row}
-      <Row rowDefinition={row} />
+      <Row on:edit={(event) => dispatch("edit", event)} rowDefinition={row} />
     {/each}
   </tbody>
 </table>

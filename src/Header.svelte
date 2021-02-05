@@ -1,17 +1,10 @@
-<script context="module" lang="ts">
-  export interface HeaderDefinition {
-    text: string;
-    sortable: boolean;
-    filterable: boolean;
-  }
-</script>
-
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { HeaderDefinition } from "./Interfaces/HeaderDefinition";
   import Filter from "./Misc/Filter.svelte";
   import Sort from "./Misc/Sort.svelte";
 
-  export let headerDefinition: HeaderDefinition = null;
+  export let headerDefinition: HeaderDefinition;
 
   let dropDownVisible: boolean = false;
 

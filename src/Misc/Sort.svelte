@@ -1,17 +1,9 @@
-<script context="module" lang="ts">
-  type Sort = "asc" | "desc" | "normal";
-  export interface SortEvent {
-    headerDefinition: HeaderDefinition;
-    sort: Sort;
-    rawEvent: Event;
-  }
-</script>
-
 <script lang="ts">
-  import { HeaderDefinition } from "../Header.svelte";
   import { createEventDispatcher } from "svelte";
+  import { Sort } from "../Interfaces/Events/SortEvent";
+  import { HeaderDefinition } from "../Interfaces/HeaderDefinition";
 
-  export let headerDefinition: HeaderDefinition = null;
+  export let headerDefinition: HeaderDefinition;
 
   const dispatch = createEventDispatcher();
   let currentSort: Sort = "normal";

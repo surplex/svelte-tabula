@@ -1,16 +1,8 @@
-<script context="module" lang="ts">
-  export interface FilterEvent {
-    headerDefinition: HeaderDefinition;
-    filter: string;
-    rawEvent: Event;
-  }
-</script>
-
 <script lang="ts">
-  import { HeaderDefinition } from "../Header.svelte";
   import { createEventDispatcher } from "svelte";
+  import { HeaderDefinition } from "../Interfaces/HeaderDefintion";
 
-  export let headerDefinition: HeaderDefinition = null;
+  export let headerDefinition: HeaderDefinition;
 
   let dropDownVisible: boolean = false;
 

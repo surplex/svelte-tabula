@@ -1,19 +1,8 @@
-<script context="module" lang="ts">
-  export interface ColumnDefinition {
-    editable: boolean;
-    value: string;
-  }
-  export interface EditEvent {
-    columnDefinition: ColumnDefinition;
-    value: string;
-    rawEvent: Event;
-  }
-</script>
-
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { ColumnDefinition } from "./Interfaces/ColumnDefinition";
 
-  export let columnDefinition: ColumnDefinition = null;
+  export let columnDefinition: ColumnDefinition;
 
   const dispatch = createEventDispatcher();
   let editActive: boolean = false;
