@@ -30,7 +30,7 @@ A Table Component with some batteries included.
     ];
 </script>
 <Table>
-    <Header {headerDefinitions}/>
+    <Header slot="head" {headerDefinitions}/>
     {#each data as row}
         <Row data={row} />
     {/each}
@@ -40,7 +40,7 @@ A Table Component with some batteries included.
 ### Modify the editable property at column level
 ```svelte
 <script lang="ts">
-    import { Table, Header, Row, Column } from "surplex/svelte-tabula";
+    import { Table, Header, Row, Column, FilterEvent } from "surplex/svelte-tabula";
     const data: any[] = [
         {id: 1, name: "Daniel", jobTitle: "Software craftsman"},
         {id: 3, name: "Max", jobTitle: "Head of Development"},
@@ -53,12 +53,11 @@ A Table Component with some batteries included.
     ];
 </script>
 <Table>
-    <Header {headerDefinitions}/>
+    <Header slot="head" on:sort={() => data.sort()} on:filter={(event: FilterEvent) => {}} {headerDefinitions}/>
     {#each data as row}
         <Row>
-            {#each row as column}
-                <Column data={column} editable={row.name == "Daniel"}>
-            {/each}
+            <!-- slot name equals prop value in HeaderDefinition -->
+            <td slot="name">Daniel</td>
         </Row>
     {/each}
 </Table>
