@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { HeaderDefinition } from "./Interfaces/HeaderDefinition";
   import { RowDefinition } from "./Interfaces/RowDefinition";
   import { headerDefinitions } from "./stores";
