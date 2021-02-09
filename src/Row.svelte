@@ -39,7 +39,7 @@
 <tr>
   {#each tableData as rowDefinition}
     {#if $$slots[rowDefinition.prop]}
-      <slot name={rowDefinition.prop} {rowDefinition} />
+      <!-- TODO: Implement dynamic slots or another solution -->
     {:else}
       <td
         on:click={() => (rowDefinition.editable ? (editActive = true) : null)}
