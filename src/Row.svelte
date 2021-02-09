@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-import { HeaderDefinition } from "./Interfaces/HeaderDefinition";
-import { RowDefinition } from "./Interfaces/RowDefinition";
+  import { HeaderDefinition } from "./Interfaces/HeaderDefinition";
+  import { RowDefinition } from "./Interfaces/RowDefinition";
   import { headerDefinitions } from "./stores";
   import { createEventDispatcher } from "svelte";
   export let row: Object;
@@ -10,24 +10,29 @@ import { RowDefinition } from "./Interfaces/RowDefinition";
   let editActive: boolean = false;
 
   headerDefinitions.subscribe((headerDefinitionsValue: HeaderDefinition[]) => {
-      tableData = headerDefinitionsValue.map((headerDefinition: HeaderDefinition) => {
+    tableData = headerDefinitionsValue.map(
+      (headerDefinition: HeaderDefinition) => {
         if (!Object.keys(row).includes(headerDefinition.prop)) {
-            return;
+          return;
         }
         return {
-              prop: headerDefinition.prop,
-              value: row[headerDefinition.prop],
-              editable: headerDefinition.editable
-          };
-      });
+          prop: headerDefinition.prop,
+          value: row[headerDefinition.prop],
+          editable: headerDefinition.editable,
+        };
+      }
+    );
   });
 
-  const triggerEditEvent = (event: KeyboardEvent, rowDefinition: RowDefinition) => {
+  const triggerEditEvent = (
+    event: KeyboardEvent,
+    rowDefinition: RowDefinition
+  ) => {
     if (event.code != "Enter") {
       return;
     }
     editActive = false;
-    dispatch("edit", { rowDefinition, rowDefinition.value, rawEvent: event });
+    dispatch("edit", { rowDefinition, rawEvent: event });
   };
 </script>
 
@@ -40,7 +45,9 @@ import { RowDefinition } from "./Interfaces/RowDefinition";
         on:click={() => (rowDefinition.editable ? (editActive = true) : null)}
       >
         {#if rowDefinition.editable && editActive}
-          <textarea on:keydown={(event) => triggerEditEvent(event, rowDefinition)} />
+          <textarea
+            on:keydown={(event) => triggerEditEvent(event, rowDefinition)}
+          />
         {:else}
           {rowDefinition.value}
         {/if}
