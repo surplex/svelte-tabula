@@ -1,7 +1,7 @@
-import { ColumnDefinition } from "../ColumnDefinition";
+import { RowDefinition } from "../RowDefinition";
 
 export interface EditEvent {
-    columnDefinition: ColumnDefinition;
+    rowDefinition: RowDefinition;
     value: string;
     rawEvent: Event;
 }
