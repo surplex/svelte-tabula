@@ -1,4 +1,5 @@
-import { ColumnDefinition } from "./ColumnDefinition";
 export interface RowDefinition {
-    columns: ColumnDefinition[];
+    prop: string;
+    value: string;
+    editable: boolean;
 }

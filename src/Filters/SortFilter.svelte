@@ -2,9 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { Sort } from "../Interfaces/Events/SortEvent";
   import { HeaderDefinition } from "../Interfaces/HeaderDefinition";
-
   export let headerDefinition: HeaderDefinition;
-
   const dispatch = createEventDispatcher();
   let currentSort: Sort = "normal";
   const getNewSort = () => {

@@ -1,31 +1,55 @@
 <script lang="ts">
+  import { getContext, onMount } from "svelte";
+  import { optionsKey } from "./context";
+  import SortFilter from "./Filters/SortFilter.svelte";
+  import TextFilter from "./Filters/TextFilter.svelte";
   import { HeaderDefinition } from "./Interfaces/HeaderDefinition";
-  import Filter from "./Misc/Filter.svelte";
-  import Sort from "./Misc/Sort.svelte";
+  import { headerDefinitions as hdStore } from "./stores";
+  export let headerDefinitions: HeaderDefinition[] = [];
+  onMount(() => {
+    hdStore.set(headerDefinitions);
+  });
 
-  export let headerDefinition: HeaderDefinition;
+  const { getClassesForElement } = getContext(optionsKey);
+  let dropDownVisible: HeaderDefinition | undefined = undefined;
 
-  let dropDownVisible: boolean = false;
+  const setDropDown = (headerDefinition: HeaderDefinition) => {
+    if (headerDefinition === dropDownVisible) {
+      dropDownVisible = undefined;
+    }
+    dropDownVisible = headerDefinition;
+  };
 </script>
 
-<th on:click={() => (dropDownVisible = !dropDownVisible)}>
-  {headerDefinition.text}
-  <section style={dropDownVisible ? "display: block;" : "display: none"}>
-    {#if headerDefinition.sortable}
-      <Sort {headerDefinition} on:sort />
-    {/if}
-    {#if headerDefinition.filterable}
-      <Filter {headerDefinition} on:filter />
-    {/if}
-  </section>
-</th>
+<tr class={getClassesForElement("tr")}>
+  {#each headerDefinitions as headerDefinition}
+    <th
+      on:click={() => setDropDown(headerDefinition)}
+      class={getClassesForElement("th")}
+    >
+      {headerDefinition.name}
+      <section
+        class={getClassesForElement("dropdown")}
+        style={dropDownVisible === headerDefinition
+          ? "display: block;"
+          : "display: none"}
+      >
+        {#if headerDefinition.sortable}
+          <SortFilter {headerDefinition} on:sort />
+        {/if}
+        {#if headerDefinition.filterable}
+          <TextFilter {headerDefinition} on:filter />
+        {/if}
+      </section>
+    </th>
+  {/each}
+</tr>
 
 <style>
   th {
     position: relative;
     display: inline-block;
   }
-
   section {
     position: absolute;
     background-color: #f9f9f9;

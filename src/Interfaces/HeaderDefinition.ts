@@ -1,5 +1,7 @@
 export interface HeaderDefinition {
-    text: string;
-    sortable: boolean;
-    filterable: boolean;
-  }
+  prop: string;
+  name: string;
+  sortable: boolean;
+  filterable: boolean;
+  editable: boolean;
+}

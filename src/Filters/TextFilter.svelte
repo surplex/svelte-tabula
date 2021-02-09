@@ -1,11 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { HeaderDefinition } from "../Interfaces/HeaderDefinition";
-
   export let headerDefinition: HeaderDefinition;
-
-  let dropDownVisible: boolean = false;
-
   const dispatch = createEventDispatcher();
 </script>
 
